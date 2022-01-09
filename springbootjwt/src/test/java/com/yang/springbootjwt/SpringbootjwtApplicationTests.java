@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
+import com.yang.springbootjwt.Utils.JwtUtil.JwtUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -87,4 +88,19 @@ class SpringbootjwtApplicationTests {
      *   AlgorithmMismatchException     算法不匹配异常
      *   InvalidClaimException          失效的payload异常
      */
+
+    @Test
+    public void testToken(){
+        HashMap<String , String> map = new HashMap<>();
+        map.put("username","gy");
+        map.put("userId", "123");
+        String token = JwtUtil.getToken(map);
+        System.out.println(token);
+
+        DecodedJWT decodedJWT = JwtUtil.checkToken(token);
+        System.out.println(decodedJWT.getClaim("username").asString());
+        System.out.println(decodedJWT.getClaim("userId").asString());
+        String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(decodedJWT.getExpiresAt());
+        System.out.println("token 到期时间为："+format);
+    }
 }
