@@ -59,6 +59,12 @@
             <artifactId>druid</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <!--导入mybatisPlus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.5</version>
+        </dependency>
     </dependencies>
 
     <build>

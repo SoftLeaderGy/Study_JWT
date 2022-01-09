@@ -28,7 +28,7 @@ public class JwtUtil {
     public static String getToken(Map<String,String> map){
         // 使用日历工具类，创建过期时间
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.HOUR , 3); // 默认三个小时token过期
+        instance.add(Calendar.SECOND , 10); // 默认三个小时token过期
 
         // 创建JWT buider
         JWTCreator.Builder builder = JWT.create();
@@ -49,16 +49,10 @@ public class JwtUtil {
      * @Date: 2022/01/09 21:21:21
      */
     public static DecodedJWT checkToken(String token){
-        try {
             DecodedJWT verify = JWT
                     .require(Algorithm.HMAC256(SIGN)).build() // 验签名
                     .verify(token);// 验证整体token的合法性
             return verify;
-        }catch (TokenExpiredException tokenExpiredException){
-            throw new RuntimeException("用户登陆失效，请重新登陆");
-        }catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
     }
     
 }
