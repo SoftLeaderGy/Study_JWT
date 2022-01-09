@@ -65,30 +65,12 @@ public class UserController {
      *   InvalidClaimException          失效的payload异常
      */
     @PostMapping("/user/test")
-    public Map<String,Object> test(String token){
+    public Map<String,Object> test(){
         Map<String , Object> map = new HashMap<>();
 
-        try {
-            DecodedJWT decodedJWT = JwtUtil.checkToken(token);
-            map.put("state",true);
-            map.put("msg","请求成功");
-            return map;
-        }catch (SignatureVerificationException signatureVerificationException) {
-            signatureVerificationException.printStackTrace();
-            map.put("msg", "无效签名！");
-        }catch (TokenExpiredException tokenExpiredException) {
-            tokenExpiredException.printStackTrace();
-            map.put("msg", "token过期");
-        }catch (AlgorithmMismatchException algorithmMismatchException) {
-            algorithmMismatchException.printStackTrace();
-            map.put("msg", "token算法不一致");
-        }catch (InvalidClaimException invalidClaimException) {
-            invalidClaimException.printStackTrace();
-            map.put("msg", "token无效");
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        map.put("state",false);
+
+        map.put("state",true);
+        map.put("msg","请求成功");
         return map;
     }
 }

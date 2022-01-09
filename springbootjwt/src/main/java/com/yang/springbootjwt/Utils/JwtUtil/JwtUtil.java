@@ -28,7 +28,7 @@ public class JwtUtil {
     public static String getToken(Map<String,String> map){
         // 使用日历工具类，创建过期时间
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.SECOND , 10); // 默认三个小时token过期
+        instance.add(Calendar.HOUR , 3); // 默认三个小时token过期
 
         // 创建JWT buider
         JWTCreator.Builder builder = JWT.create();
